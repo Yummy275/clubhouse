@@ -1,0 +1,27 @@
+const User = require('../models/user');
+const bcrypt = require('bcryptjs');
+
+exports.signUp = (req, res, next) => {
+    if (req.body.password === req.body.confirmPassword) {
+        bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+            if (!err) {
+                const user = new User({
+                    username: req.body.username,
+                    password: hashedPassword,
+                    email: req.body.email,
+                    groups: [],
+                    posts: [],
+                }).save((err) => {
+                    if (err) {
+                        return next(err);
+                    }
+                    res.render('userHome');
+                });
+            } else {
+                return next(err);
+            }
+        });
+    } else {
+        //try again
+    }
+};
