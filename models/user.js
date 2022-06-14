@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     email: { type: String, required: true },
     posts: { type: Array, required: true },
-    groups: { type: Array, required: true },
+    clubs: { type: Array, required: true },
 });
 
 //Export model
