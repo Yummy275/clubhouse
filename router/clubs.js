@@ -9,7 +9,10 @@ router.get('/', (req, res) => {
 router.get('/new-club', (req, res) => {
     res.render('new-club-form');
 });
-
 router.post('/new-club', clubController.createClub);
+
+router.get('/:clubTitle', (req, res) => {
+    res.render('club-page', { clubTitle: req.params.clubTitle });
+});
 
 module.exports = router;
