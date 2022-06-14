@@ -2,10 +2,11 @@ extends layout
 
 block content
     if user
-        h1 Welcome Back To The Clubhouse
+        h1 Welcome Back To The Clubhouse #{user.username}!
         a(href='/log-out') Log Out
     else 
         h1 Hello Stranger, Welcome To The Clubhouse
         a(href='/sign-up') Sign Up
         a(href='/log-in') Log In
+        a(href='/clubs') Clubs
 
