@@ -6,6 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const indexRouter = require('./router/index');
 const User = require('./models/user');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 app.use(express.json());
