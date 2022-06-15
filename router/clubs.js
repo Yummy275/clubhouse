@@ -15,4 +15,8 @@ router.get('/:clubTitle', (req, res) => {
     res.render('club-page', { clubTitle: req.params.clubTitle });
 });
 
+router.get('/:clubTitle/new-post', (req, res) => {
+    res.render('new-post-form');
+});
+
 module.exports = router;
