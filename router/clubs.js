@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const clubController = require('../controllers/clubController');
+const postController = require('../controllers/postController');
 
 router.get('/', (req, res) => {
     res.render('clubs');
@@ -18,5 +19,7 @@ router.get('/:clubTitle', (req, res) => {
 router.get('/:clubTitle/new-post', (req, res) => {
     res.render('new-post-form');
 });
+
+router.post('/:clubTitle/new-post', postController.createPost);
 
 module.exports = router;
