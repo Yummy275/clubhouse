@@ -16,8 +16,8 @@ exports.signUp = (req, res, next) => {
                     if (err) {
                         return next(err);
                     }
-                    console.log(`User ${user.username} created`);
-                    res.render('index');
+                    console.log(`User ${req.body.username} created`);
+                    res.redirect('/');
                 });
             } else {
                 return next(err);
