@@ -61,7 +61,7 @@ passport.deserializeUser(function (id, done) {
 app.use(session({ secret: 'test', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(function (req, res, next) {
-    res.locals.currentUser = req.user;
+    res.locals.user = req.user;
     next();
 });
 app.use(passport.session());
