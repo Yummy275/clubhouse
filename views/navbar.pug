@@ -1,14 +1,9 @@
 nav(class="navbar navbar-light bg-light")
-    div(class='container-fluid' style='max-width: 800px')
-        div
-            a(href='/') Home
-            a(href='/new-post') Make Post
-            a(href='/clubs') Clubs
-            a(href='/posts') Posts
-        div
-            if user
-                p Welcome #{user.username}
-                a(href='/log-out') Log Off
-            else
-                a(href='/sign-up') Sign Up
-                a(href='/log-in') Log In
+    div(class='container-fluid' style='max-width: 500px')
+        if user
+            a(href='/') Posts
+            a(href='/log-out') Log Off
+        else
+            a(href='/') Posts
+            a(href='/sign-up') Sign Up
+            a(href='/log-in') Log In

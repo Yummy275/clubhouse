@@ -9,9 +9,6 @@ exports.signUp = (req, res, next) => {
                 const user = new User({
                     username: req.body.username,
                     password: hashedPassword,
-                    email: req.body.email,
-                    groups: [],
-                    posts: [],
                 }).save((err) => {
                     if (err) {
                         return next(err);
