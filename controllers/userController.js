@@ -3,12 +3,20 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 exports.signUp = (req, res, next) => {
+    const adminStatus = (function () {
+        if (req.body.admin) {
+            return true;
+        } else {
+            return false;
+        }
+    })();
     if (req.body.password === req.body.confirmPassword) {
         bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
             if (!err) {
                 const user = new User({
                     username: req.body.username,
                     password: hashedPassword,
+                    admin: adminStatus,
                 }).save((err) => {
                     if (err) {
                         return next(err);
