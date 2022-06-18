@@ -1,8 +1,10 @@
 extends layout 
 
 block content
-    if user
-        h1 There is a user
-    else 
-        h1 Stranger
+    div(class='container-md')
+        if user
+            h1 Welcome #{user.username}
+            include new-post-form.pug
+        else 
+            h1 Stranger
 

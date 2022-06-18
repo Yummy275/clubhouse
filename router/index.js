@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const userRoutes = require('./users');
+const postController = require('../controllers/postController');
 
 router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { user: req.user });
 });
 
-router.use('/', userRoutes);
+router.post('/', postController.createPost);
 
 module.exports = router;

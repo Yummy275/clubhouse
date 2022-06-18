@@ -5,6 +5,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const indexRouter = require('./router/index');
+const userRouter = require('./router/users');
 const User = require('./models/user');
 const bcrypt = require('bcryptjs');
 
@@ -68,5 +69,6 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
+app.use('/', userRouter);
 
 app.listen(3000, () => console.log('app listening on port 3000!'));
