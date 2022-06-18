@@ -6,5 +6,14 @@ block content
             h1 Welcome #{user.username}
             include new-post-form.pug
         else 
-            h1 Stranger
+            h4 Hello stranger! Log in or create an account to see authors and make your own posts. If you check the admin box you'll be able to delete posts as well.
+        if posts
+            div
+                each post in posts
+                    div(class='p-2 border')
+                        h4 #{post.title}
+                        p(class='text-muted') By #{post.author} - #{post.date}
+                        p #{post.content}
+        else
+            h2 No posts
 

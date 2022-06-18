@@ -13,6 +13,9 @@ exports.createPost = (req, res, next) => {
         if (err) {
             return next(err);
         } else {
+            console.log(
+                `${req.user.username} posted ${req.body.title}, ${formattedDate}`
+            );
             res.redirect('/');
         }
     });
