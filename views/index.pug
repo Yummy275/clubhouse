@@ -11,7 +11,10 @@ block content
             each post in posts
                 div(class='p-2 border')
                     h4 #{post.title}
-                    p(class='text-muted') By #{post.author} - #{post.date}
+                    if user
+                        p(class='text-muted') By #{post.author} - #{post.date}
+                    else
+                        p(class='text-muted') By ???
                     p #{post.content}
                     if user && user.admin
                         form(action=`/delete-post/${post.id}` method='post')

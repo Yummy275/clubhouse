@@ -20,3 +20,10 @@ exports.createPost = (req, res, next) => {
         }
     });
 };
+
+exports.deletePost = (req, res) => {
+    Post.findByIdAndRemove(req.params.postId, (err) => {
+        if (err) return next(err);
+        res.redirect('/');
+    });
+};

@@ -3,6 +3,9 @@ extends layout
 block content
     div(class='container mt-5' style='max-width: 400px')
         h3(class='mb-4') Sign Up
+        if errors
+            each error in errors
+                p(class='text-danger') #{error.msg}
         form(method='post' action='/sign-up' )
             div.form-group(class='mb-3')
                 label.form-label(for='username') Username
