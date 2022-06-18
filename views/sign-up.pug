@@ -9,13 +9,13 @@ block content
         form(method='post' action='/sign-up' )
             div.form-group(class='mb-3')
                 label.form-label(for='username') Username
-                input#username.form-control(type='text' name='username')
+                input#username.form-control(type='text' name='username' required) 
             div.form-group(class='mb-3')
                 label.form-label(for='password') Password
-                input#password.form-control(type='password' name='password')
+                input#password.form-control(type='password' name='password' required)
             div.form-group(class='mb-3')
                 label.form-label(for='confirm-password') Confirm Password
-                input#confirm-password.form-control(type='password' name='confirmPassword')
+                input#confirm-password.form-control(type='password' name='confirmPassword' required)
             div.form-check(class='mb-3')
                 input#admin.form-check-input(type='checkbox' name='admin')
                 label.form-check-label(for='admin') Admin   

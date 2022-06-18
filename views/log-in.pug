@@ -6,8 +6,8 @@ block content
         form(method='post' action='/log-in' style='max-width: 400px')
             div.form-group(class='mb-3')
                 label.form-label(for='username') Username
-                input#username.form-control(type='text' name='username')
+                input#username.form-control(type='text' name='username' required)
             div.form-group(class='mb-3')
                 label.form-label(for='password') Password
-                input#password.form-control(type='password' name='password')
+                input#password.form-control(type='password' name='password' required)
             button.btn.btn-dark(type='submit' class='mt-2') Log In

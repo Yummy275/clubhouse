@@ -27,3 +27,15 @@ exports.deletePost = (req, res) => {
         res.redirect('/');
     });
 };
+
+exports.getPosts = (req, res) => {
+    Post.find()
+        .sort([['_id', -1]])
+        .exec((err, listPosts) => {
+            if (err) {
+                return next(err);
+            } else {
+                res.render('index', { user: req.user, posts: listPosts });
+            }
+        });
+};

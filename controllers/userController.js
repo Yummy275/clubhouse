@@ -25,31 +25,59 @@ exports.signUp = [
         if (!errors.isEmpty()) {
             res.render('sign-up', { errors: errors.array() });
         } else {
-            const adminStatus = (function () {
-                if (req.body.admin) {
-                    return true;
-                } else {
-                    return false;
-                }
-            })();
+            User.findOne({ username: req.body.username }).exec(
+                (err, foundUser) => {
+                    if (err) {
+                        res.render('sign-up', {
+                            errors: [
+                                {
+                                    msg: 'Sorry, something went wrong with user sign up! Please try again later.',
+                                },
+                            ],
+                        });
+                    } else if (foundUser) {
+                        res.render('sign-up', {
+                            errors: [
+                                {
+                                    msg: 'Username already exists.',
+                                },
+                            ],
+                        });
+                    } else {
+                        const adminStatus = (function () {
+                            if (req.body.admin) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        })();
 
-            bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-                if (!err) {
-                    const user = new User({
-                        username: req.body.username,
-                        password: hashedPassword,
-                        admin: adminStatus,
-                    }).save((err) => {
-                        if (err) {
-                            return next(err);
-                        }
-                        console.log(`User ${req.body.username} created`);
-                        res.redirect('/');
-                    });
-                } else {
-                    return next(err);
+                        bcrypt.hash(
+                            req.body.password,
+                            10,
+                            (err, hashedPassword) => {
+                                if (!err) {
+                                    const user = new User({
+                                        username: req.body.username,
+                                        password: hashedPassword,
+                                        admin: adminStatus,
+                                    }).save((err) => {
+                                        if (err) {
+                                            return next(err);
+                                        }
+                                        console.log(
+                                            `User ${req.body.username} created`
+                                        );
+                                        res.redirect('/');
+                                    });
+                                } else {
+                                    return next(err);
+                                }
+                            }
+                        );
+                    }
                 }
-            });
+            );
         }
     },
 ];
