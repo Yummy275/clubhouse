@@ -17,4 +17,11 @@ router.get('/', (req, res) => {
 
 router.post('/', postController.createPost);
 
+router.post('/delete-post/:postId', (req, res) => {
+    Post.findByIdAndRemove(req.params.postId, (err) => {
+        if (err) return next(err);
+        res.redirect('/');
+    });
+});
+
 module.exports = router;
