@@ -2,9 +2,22 @@ var express = require('express');
 var router = express.Router();
 const postController = require('../controllers/postController');
 
-router.get('/', postController.getPosts);
+const renderHome = (req, res) => {
+    res.render('index', {
+        user: req.user,
+        posts: req.listPosts,
+        postError: req.postError,
+    });
+};
 
-router.post('/', postController.createPost);
+router.get('/', postController.getPosts, renderHome);
+
+router.post(
+    '/new-post',
+    postController.createPost,
+    postController.getPosts,
+    renderHome
+);
 
 router.post('/delete-post/:postId', postController.deletePost);
 

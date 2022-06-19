@@ -3,19 +3,19 @@ extends layout
 block content
     div(class='container-md d-flex flex-column align-items-center')
         if user
-            h1 Welcome #{user.username}
+            h1(class='my-5') Welcome #{user.username}
             include new-post-form.pug
         else 
-            h4 Hello stranger! Log in or create an account to see authors and make your own posts. If you check the admin box you'll be able to delete posts as well.
-        div
+            h4(style='max-width: 800px' class='my-5') Hello stranger! Log in or create an account to see authors and make your own posts. If you check the admin box you'll be able to delete posts as well.
+        div(class='d-flex gap-5 justify-content-center flex-wrap')
             each post in posts
-                div(class='p-2 border')
+                div(class='p-2 border' style='max-width: 450px;min-width: 250px')
                     h4 #{post.title}
                     if user
                         p(class='text-muted') By #{post.author} - #{post.date}
                     else
                         p(class='text-muted') By ???
-                    p #{post.content}
+                    p(class='bg-light p-1') #{post.content}
                     if user && user.admin
                         form(action=`/delete-post/${post.id}` method='post')
                             button.btn.btn-danger.btn-sm(type='submit') Delete

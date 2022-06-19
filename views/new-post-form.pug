@@ -1,11 +1,13 @@
 
-div(class='container mt-5 d-flex align-items-center flex-column')
+div(class='container my-5 p-2 d-flex align-items-center flex-column bg-light')
     h4(class='mb-4') Make A Post
-    form(method='post' action='' style='max-width: 400px')
+    if postError
+        each error in postError
+            p(class='text-danger') #{error.msg}
+    form(method='post' action='/new-post' style='max-width: 400px')
         div.form-group(class='mb-3')
             label.form-label(for='title') Title
-            input#title.form-control(type='text' name='title' required)
+            input#title.form-control(type='text' name='title' maxlength='24' required)
         div.form-group(class='mb-3')
-            label.form-label(for='content') Content
-            input#content.form-control(type='text' name='content' required)
+            textarea#content.form-control(placeholder="What's on your mind?" type='text' name='content' maxlength='200' rows='5' required)
         button.btn.btn-dark(type='submit' class='mt-2') Post

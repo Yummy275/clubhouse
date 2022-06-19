@@ -15,7 +15,9 @@ exports.createPost = [
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/');
+            // did not pass validation
+            req.postError = errors.array();
+            next();
         } else {
             const creationDate = new Date();
             const formattedDate = creationDate.toDateString();
@@ -32,7 +34,7 @@ exports.createPost = [
                     console.log(
                         `${req.user.username} posted ${req.body.title}, ${formattedDate}`
                     );
-                    res.redirect('back');
+                    next();
                 }
             });
         }
@@ -46,14 +48,15 @@ exports.deletePost = (req, res) => {
     });
 };
 
-exports.getPosts = (req, res) => {
+exports.getPosts = (req, res, next) => {
     Post.find()
         .sort([['_id', -1]])
         .exec((err, listPosts) => {
             if (err) {
                 return next(err);
             } else {
-                res.render('index', { user: req.user, posts: listPosts });
+                req.listPosts = listPosts;
+                next();
             }
         });
 };
