@@ -84,5 +84,5 @@ exports.signUp = [
 
 exports.logIn = passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/log-in',
+    failureRedirect: '/log-in?error=true',
 });

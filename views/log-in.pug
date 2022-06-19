@@ -3,6 +3,8 @@ extends layout
 block content
     div(class='container mt-5' style='max-width: 400px')
         h3(class='mb-4') Log In
+        if errorMsg 
+            p(class='text-danger my-2') Failed signing in. Check username and password.
         form(method='post' action='/log-in' style='max-width: 400px')
             div.form-group(class='mb-3')
                 label.form-label(for='username') Username

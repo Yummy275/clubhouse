@@ -3,7 +3,11 @@ var router = express.Router();
 const userController = require('../controllers/userController');
 
 router.get('/log-in', (req, res) => {
-    res.render('log-in');
+    if (req.query.error) {
+        res.render('log-in', { errorMsg: 'enabled' });
+    } else {
+        res.render('log-in');
+    }
 });
 router.post('/log-in', userController.logIn);
 
