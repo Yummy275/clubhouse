@@ -78,4 +78,4 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/', userRouter);
 
-app.listen(process.env.PORT || 3000);
+module.exports = app;
