@@ -9,6 +9,8 @@ const userRouter = require('./router/users');
 const User = require('./models/user');
 const bcrypt = require('bcryptjs');
 
+require('dotenv').config();
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -16,8 +18,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
 
 //Set up mongoose connection
-var mongoDB =
-    'mongodb+srv://Yummy:Indeed@cluster0.gvyhh.mongodb.net/?retryWrites=true&w=majority';
+var mongoDB = process.env.MONGO_DB_URL;
 mongoose.connect(
     mongoDB,
     { useNewUrlParser: true, useUnifiedTopology: true },
@@ -58,7 +59,13 @@ passport.deserializeUser(function (id, done) {
         done(err, user);
     });
 });
-app.use(session({ secret: 'test', resave: false, saveUninitialized: true }));
+app.use(
+    session({
+        secret: process.env.SESSION_KEY,
+        resave: false,
+        saveUninitialized: true,
+    })
+);
 app.use(passport.initialize());
 app.use(function (req, res, next) {
     res.locals.user = req.user;
